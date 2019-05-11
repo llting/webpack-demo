@@ -13,3 +13,9 @@
 
 ## babel-loader @babel/core @babel/preset-env
 - 把es6转化成es5
+
+## expose-loader
+- 暴露全局的loader
+
+## html-withimg-loader
+- 解决html页面中的img的src路径

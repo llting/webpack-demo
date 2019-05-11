@@ -45,6 +45,21 @@ module.exports = {
 
             }, */
             {
+                test: /\.html$/,
+                use: "html-withimg-loader"
+
+            },
+            {
+                test: /\.(jpg|png|jpeg)$/,
+                // use: "file-loader"
+                use: {
+                    loader: "url-loader",
+                    options:{
+                        limit: 200*1024
+                    }
+                }
+            },
+            {
                 test: /\.js$/,
                 use: [
                     {
@@ -81,13 +96,13 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-        filename: "index.html",
-        template: "./src/index.html",
-        minify: {
-            removeAttributeQuotes: true,
-            // collapseWhitespace: true 
-        },
-        // hash:true
+            filename: "index.html",
+            template: "./src/index.html",
+            minify: {
+                removeAttributeQuotes: true,
+                // collapseWhitespace: true 
+            },
+            // hash:true
         }),
         new MiniCssExtractPlugin({
             filename: 'main.css'
