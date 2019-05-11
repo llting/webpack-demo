@@ -11,6 +11,9 @@ module.exports = {
         path: path.join(__dirname, "dist"),
         filename: 'bundle.[hash:8].js'
     },
+    /*  externals: { // 在html中直接 script src="" 引入jquery  在每个js模块中 import $ from jquery 不把jquery打包到 bundle.js
+         jquery : "$"
+     }, */
     mode: "development", //  "development" | "production" | "none"
     optimization: { //  优化项
         minimizer: [
@@ -27,7 +30,11 @@ module.exports = {
     module: {
 
         rules: [
-            {
+            /*  {
+                 test: require.resolve('jquery'), // 全局使用$ window.$ 
+                 use:'expose-loader?$'
+             }, */
+            /* {
                 test: /\.js$/,
                 use:{
                     loader: 'eslint-loader',
@@ -36,7 +43,7 @@ module.exports = {
                     }
                 },
 
-            },
+            }, */
             {
                 test: /\.js$/,
                 use: [
@@ -72,7 +79,8 @@ module.exports = {
 
 
     },
-    plugins: [new HtmlWebpackPlugin({
+    plugins: [
+        new HtmlWebpackPlugin({
         filename: "index.html",
         template: "./src/index.html",
         minify: {
@@ -80,10 +88,14 @@ module.exports = {
             // collapseWhitespace: true 
         },
         // hash:true
-    }),
-    new MiniCssExtractPlugin({
-        filename: 'main.css'
-    })],
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'main.css'
+        }),
+        new webpack.ProvidePlugin({ // 在每个模块中注入$
+            $: 'jquery'
+        })
+    ],
     devServer: {
         progress: true,
         port: 3000,

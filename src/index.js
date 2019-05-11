@@ -1,7 +1,9 @@
+
+// import $ from 'jquery'
 require("@babel/polyfill")
 require('./index.less') 
 
-console.log("hello webpack")
+/* console.log("hello webpack")
 let str = "es6 转化成 es5"
 
 let B;
@@ -20,4 +22,7 @@ function * gen(){
 }
 console.log(gen().next())
 
-console.log('aaa'.includes('a'))
+console.log('aaa'.includes('a')) */
+
+console.log($)
+console.log(window.$)
