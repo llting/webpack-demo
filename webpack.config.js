@@ -9,7 +9,8 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.join(__dirname, "dist"),
-        filename: 'bundle.[hash:8].js'
+        filename: 'bundle.[hash:8].js',
+       // publicPath: 'wwww.mr.com' //引用资源的公共路径 应用所有资源 包括js css img
     },
     /*  externals: { // 在html中直接 script src="" 引入jquery  在每个js模块中 import $ from jquery 不把jquery打包到 bundle.js
          jquery : "$"
@@ -55,9 +56,12 @@ module.exports = {
                 use: {
                     loader: "url-loader",
                     options:{
-                        limit: 200*1024
+                        limit: 1,
+                        outputPath: '/img/',
+                        publicPath: 'wwww.mr.com'
                     }
-                }
+                },
+                
             },
             {
                 test: /\.js$/,
@@ -105,7 +109,7 @@ module.exports = {
             // hash:true
         }),
         new MiniCssExtractPlugin({
-            filename: 'main.css'
+            filename: 'css/main.css'
         }),
         new webpack.ProvidePlugin({ // 在每个模块中注入$
             $: 'jquery'

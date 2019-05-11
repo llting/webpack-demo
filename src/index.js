@@ -23,6 +23,8 @@ function * gen(){
 console.log(gen().next())
 
 console.log('aaa'.includes('a')) */
-
+// 1> expose-loader 暴露在window中
+// 2> providePlugin 给每个模块都注入 $ 
+// 3> 引入不打包 
 console.log($)
 console.log(window.$)
