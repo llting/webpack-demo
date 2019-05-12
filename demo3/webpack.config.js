@@ -9,6 +9,23 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         filename: "bundle.js"
     },
+    devServer:{
+        proxy:{
+            
+            before(app) {
+                app.get("/api", (req,res) => {
+                    res.send("hello") // 2》 mock 数据 前端调试用
+                })
+            }
+           /* "/api" : {
+            target: "http://localhost:8080",
+            pathRewrite: {"/api": ""} //重写请求 例子 /api/user --> /user
+            } */
+            // '/api' : "http://localhost:8080" 1》//跨域配置例子
+
+        // 3> 在服务端中启用webpack  引入webpack webpack-dev-middleware见 服务端解决跨域.png
+        }
+    },
     /* watch:true,
     watchOptions: {
         poll: 1000, // 每秒监控1000次,
