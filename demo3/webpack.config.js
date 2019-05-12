@@ -9,21 +9,21 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         filename: "bundle.js"
     },
-    devServer:{
-        proxy:{
-            
+    devServer: {
+        proxy: {
+
             before(app) {
-                app.get("/api", (req,res) => {
+                app.get("/api", (req, res) => {
                     res.send("hello") // 2》 mock 数据 前端调试用
                 })
             }
-           /* "/api" : {
-            target: "http://localhost:8080",
-            pathRewrite: {"/api": ""} //重写请求 例子 /api/user --> /user
-            } */
+            /* "/api" : {
+             target: "http://localhost:8080",
+             pathRewrite: {"/api": ""} //重写请求 例子 /api/user --> /user
+             } */
             // '/api' : "http://localhost:8080" 1》//跨域配置例子
 
-        // 3> 在服务端中启用webpack  引入webpack webpack-dev-middleware见 服务端解决跨域.png
+            // 3> 在服务端中启用webpack  引入webpack webpack-dev-middleware见 服务端解决跨域.png
         }
     },
     /* watch:true,
@@ -32,6 +32,15 @@ module.exports = {
         aggregateTimeout: 500 ,// 防抖 500 毫秒内的监控不打包
         ignored: /node_modules/ // 忽略文件
     }, */
+    resolve: { // 解析第三方包
+        modules: [path.resolve('node_modules')], //指定查找路径
+        mainFields: ["style", "main"], // 指定查找的顺序 先找style  再找main
+        extensions: [".js", ".css", ".vue"], //指定查找的文件扩展名
+        mainFiles: [], // 入口文件的名字
+        alias: {
+            bootstrap: "bootstrap/dist/css/bootstrap.css"  // 设置别名
+        }
+    },
     mode: "production",
     //devtool: "source-map", // 源码映射， 会单独生成一个sourcemap文件 出错了 会标示当前的列和行， 是大而且全
     // devtool: "eval-source-map", // 源码映射，不会产生单独的文件， 但是可以显示行和列
@@ -42,10 +51,10 @@ module.exports = {
             filename: "index.html",
             template: "./src/index.html"
         }),
-        new CleanWebpackPlugin() , // 打包删除dist目录,
+        new CleanWebpackPlugin(), // 打包删除dist目录,
         new CopyWebpackPlugin([{
             from: "hello", to: "./", // ./代表 dist目录
-            
+
         }]),
         new webpack.BannerPlugin("版权声明")
     ]
