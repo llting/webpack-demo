@@ -1,1 +1,4 @@
-console.log(1)
+console.log(DEV)
+console.log(FLAG)
+console.log(TEST)
+console.log(EXPORESSION)

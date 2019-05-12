@@ -32,21 +32,29 @@ module.exports = {
         aggregateTimeout: 500 ,// 防抖 500 毫秒内的监控不打包
         ignored: /node_modules/ // 忽略文件
     }, */
-    resolve: { // 解析第三方包
-        modules: [path.resolve('node_modules')], //指定查找路径
-        mainFields: ["style", "main"], // 指定查找的顺序 先找style  再找main
-        extensions: [".js", ".css", ".vue"], //指定查找的文件扩展名
-        mainFiles: [], // 入口文件的名字
-        alias: {
-            bootstrap: "bootstrap/dist/css/bootstrap.css"  // 设置别名
-        }
-    },
+    // resolve: { // 解析第三方包
+    //     modules: [path.resolve('node_modules')], //指定查找路径
+    //     mainFields: ["style", "main"], // 指定查找的顺序 先找style  再找main
+    //     extensions: [".js", ".css", ".vue"], //指定查找的文件扩展名
+    //     mainFiles: [], // 入口文件的名字
+    //     alias: {
+    //         bootstrap: "bootstrap/dist/css/bootstrap.css"  // 设置别名
+    //     }
+    // },
+
     mode: "production",
     //devtool: "source-map", // 源码映射， 会单独生成一个sourcemap文件 出错了 会标示当前的列和行， 是大而且全
     // devtool: "eval-source-map", // 源码映射，不会产生单独的文件， 但是可以显示行和列
     // devtool: "cheap-module-source-map", // 报错不会产生列， 但是是一个单独的映射文件
     devtool: "cheap-module-eval-source-map", // 报错不会产生列， 不产生文件，集成在打包后的文件中
     plugins: [
+        new webpack.DefinePlugin({
+            DEV:JSON.stringify('dev'), //字符串dev
+            FLAG: 'true', // 布尔值
+            EXPORESSION:'1+1', // 输出最终值2
+            TEST:"1+2" // 自定义环境变量
+
+        }),
         new HtmlwebpackPlugin({
             filename: "index.html",
             template: "./src/index.html"
