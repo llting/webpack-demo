@@ -28,3 +28,8 @@ console.log('aaa'.includes('a')) */
 // 3> 引入不打包 
 console.log($)
 console.log(window.$)
+if(module.hot){
+    module.hot.accpet('./xxx',()=> {
+        console.log('文件更新了') // 不会整个页面刷新
+    })
+}

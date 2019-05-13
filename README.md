@@ -19,3 +19,9 @@
 
 ## html-withimg-loader
 - 解决html页面中的img的src路径
+
+## tree-shaking 
+- 前端导入模块的时候 使用import 这样在生产环境下 打包的时候， 会过滤掉没用到的代码， 而require则不会过滤
+
+## @babel/plugin-syntax-dynamic-import
+- 懒加载 动态导入 import("xxx.js").then(data => {...})
